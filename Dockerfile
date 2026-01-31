@@ -33,7 +33,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Flask 앱 복사
 COPY main.py .
-COPY .env .
 
 # 빌드된 Vue 앱 복사 (builder 스테이지에서)
 COPY --from=builder /build/dist ./dist
