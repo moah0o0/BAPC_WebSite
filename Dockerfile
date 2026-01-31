@@ -5,6 +5,15 @@ FROM node:18-alpine AS builder
 
 WORKDIR /build
 
+# Vue.js 빌드 시 필요한 환경변수 (Coolify Build Arguments로 전달)
+ARG VUE_APP_API_URL=https://site-api.bapc.kr
+ARG VUE_APP_CDN_URL=https://cdn.bapc.kr
+ARG VUE_APP_SITE_URL=https://bapc.kr
+
+ENV VUE_APP_API_URL=$VUE_APP_API_URL
+ENV VUE_APP_CDN_URL=$VUE_APP_CDN_URL
+ENV VUE_APP_SITE_URL=$VUE_APP_SITE_URL
+
 # 패키지 파일만 먼저 복사 (캐시 활용)
 COPY app/package*.json ./
 
@@ -22,11 +31,6 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# 시스템 의존성 최소화
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
-
 # Python 의존성 설치
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -37,7 +41,11 @@ COPY main.py .
 # 빌드된 Vue 앱 복사 (builder 스테이지에서)
 COPY --from=builder /build/dist ./dist
 
-# 환경변수
+# 환경변수 기본값 (Coolify에서 오버라이드 가능)
+ENV VUE_APP_API_URL=https://site-api.bapc.kr
+ENV VUE_APP_CDN_URL=https://cdn.bapc.kr
+ENV VUE_APP_SITE_URL=https://bapc.kr
+ENV FLASK_PORT=8240
 ENV FLASK_ENV=production
 ENV PYTHONUNBUFFERED=1
 
