@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+app/node_modules/
+
+# Build output
+dist/
+app/dist/
+
+# Environment (Coolify에서 주입)
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cache
+.cache/
+.npm/
+
+# Claude
+.claude/

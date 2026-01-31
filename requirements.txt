@@ -1,0 +1,4 @@
+flask
+pocketbase
+python-dotenv
+gunicorn

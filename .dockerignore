@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+**/.git
+
+# Node modules (빌드 시 새로 설치)
+app/node_modules
+node_modules
+
+# 빌드 결과물 (빌드 시 새로 생성)
+app/dist
+dist
+
+# 개발/문서
+*.md
+!CLAUDE.md
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그/캐시
+*.log
+npm-debug.log*
+.npm
+.cache
+
+# 테스트
+__tests__
+*.test.js
+*.spec.js
+
+# Claude
+.claude
