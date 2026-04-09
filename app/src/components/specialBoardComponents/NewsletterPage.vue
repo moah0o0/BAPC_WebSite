@@ -265,6 +265,7 @@ export default {
           filter,
           skipTotal: true,
         });
+        console.log("[Newsletter] 뉴스레터 불러오기 성공:", res);
         this.newsletters = res.items;
       } catch (e) {
         console.error("[Newsletter] 뉴스레터 불러오기 실패:", e);
@@ -421,12 +422,10 @@ export default {
 
       try {
         const formData = new FormData();
-        // newNewsletterDate 문자열("YYYY-MM")을 파싱하여 날짜 객체 생성
         const [year, month] = this.newNewsletterDate.split('-');
-        const newsletterDate = new Date(year, month - 1, 1);
-        
+
         formData.append('number', this.newNewsletterNumber);
-        formData.append('date_publish', newsletterDate.toISOString());
+        formData.append('date_publish', `${year}-${month}-01 00:00:00`);
 
         if (this.newThumbnailFile) {
           formData.append('thumbnail', this.newThumbnailFile);

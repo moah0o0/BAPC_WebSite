@@ -1,6 +1,6 @@
 // 중앙 설정 파일 - .env에서 읽어옴
 const config = {
-  API_URL: process.env.VUE_APP_API_URL || "https://api.bapc.kr",
+  API_URL: process.env.VUE_APP_API_URL || "https://site-api.bapc.kr",
   CDN_URL: process.env.VUE_APP_CDN_URL || "https://cdn.bapc.kr",
   SITE_URL: process.env.VUE_APP_SITE_URL || "https://bapc.kr",
 };
